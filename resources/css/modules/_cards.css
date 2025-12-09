@@ -1,0 +1,104 @@
+/* ===================================
+   CARDS
+   =================================== */
+
+.card {
+    background: var(--white);
+    border: var(--border-width-lg) solid var(--dark-color);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-weight: bold;
+    border-bottom: var(--border-width) solid var(--dark-color);
+}
+
+.card-body {
+    padding: var(--spacing-md);
+}
+
+.card-footer {
+    padding: var(--spacing-sm);
+    background-color: var(--light-gray);
+    border-top: var(--border-width) solid var(--dark-color);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-text {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.cloth-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Badge de Status no Card */
+.status-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    z-index: 1;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    font-size: var(--font-size-small);
+    text-transform: uppercase;
+}
+
+.bg-success {
+    background-color: var(--success-color);
+    color: var(--white);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.bg-warning {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.bg-danger {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}

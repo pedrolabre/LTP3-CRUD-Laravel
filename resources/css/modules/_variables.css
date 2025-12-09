@@ -1,0 +1,56 @@
+/* ===================================
+   VARIÁVEIS GLOBAIS
+   =================================== */
+
+:root {
+    /* Cores Principais */
+    --primary-color: #3498db;
+    --secondary-color: #95a5a6;
+    --success-color: #60d24c;
+    --warning-color: #ffa500;
+    --danger-color: #f43c23;
+    
+    /* Cores Neutras */
+    --dark-color: #2C3E50;
+    --light-gray: #ECF0F1;
+    --medium-gray: #7f8c8d;
+    --white: #ffffff;
+    
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #e63946 75%, #d62828 100%);
+    --gradient-footer: linear-gradient(135deg, #ff6b35 0%, #e63946 50%, #d62828 100%);
+    
+    /* Fontes */
+    --font-family: Arial, sans-serif;
+    --font-size-base: 14px;
+    --font-size-small: 12px;
+    --font-size-h1: 24px;
+    --font-size-h2: 22px;
+    --font-size-h4: 20px;
+    --font-size-h5: 18px;
+    
+    /* Espaçamentos */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 25px;
+    
+    /* Bordas */
+    --border-radius: 5px;
+    --border-radius-lg: 10px;
+    --border-radius-xl: 15px;
+    --border-radius-round: 25px;
+    --border-width: 2px;
+    --border-width-lg: 3px;
+    --border-width-xl: 4px;
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --shadow-md: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 8px 8px 15px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 8px 20px rgba(0, 0, 0, 0.4);
+    
+    /* Transições */
+    --transition-speed: 0.3s;
+}
