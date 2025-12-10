@@ -310,13 +310,54 @@
 
             <h4>Desafios da Versão Monolítica:</h4>
             <div class="warning-box" style="background: #fff3cd; border-left: 4px solid #f7931e; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                <p><strong>⚠️ Principais Dificuldades Técnicas Enfrentadas:</strong></p>
+                
+                <h5 style="color: #d62828; margin-top: 15px;">1. Route Model Binding Não Funcionando</h5>
+                <p><strong>Problema:</strong> Ao usar <code>Route::resource('clothes', ClothController::class)</code>, o Laravel não conseguia fazer o binding automático do parâmetro <code>{cloth}</code>, retornando erro "Missing required parameter".</p>
+                <p><strong>Solução Aplicada:</strong></p>
                 <ul>
-                    <li><strong>Route Model Binding:</strong> Conflitos com rotas resource impedindo binding automático</li>
-                    <li><strong>Cache de Views:</strong> Alterações em CSS e Blade não refletindo por cache do Laravel</li>
-                    <li><strong>Erro purchase_date:</strong> Problemas com campos de data nulos ao editar registros</li>
-                    <li><strong>Upload de Imagens:</strong> Imagens não aparecendo por falta de link simbólico</li>
-                    <li><strong>Conflito de Layouts:</strong> Múltiplos arquivos de layout causando inconsistências visuais</li>
+                    <li>Substituição de rotas resource por rotas explícitas</li>
+                    <li>Uso de <code>$cloth->id</code> ao invés de <code>$cloth</code> nas rotas das views</li>
+                    <li>Definição manual: <code>Route::get('clothes/{cloth}', [ClothController::class, 'show'])</code></li>
                 </ul>
+
+                <h5 style="color: #d62828; margin-top: 15px;">2. Cache de Views Impedindo Atualizações</h5>
+                <p><strong>Problema:</strong> Alterações no arquivo de layout (<code>app.blade.php</code>) não apareciam no navegador, mesmo com recarregamento forçado. Laravel mantinha versões em cache.</p>
+                <p><strong>Solução Aplicada:</strong></p>
+                <ul>
+                    <li>Limpeza sistemática de caches: <code>php artisan view:clear</code>, <code>config:clear</code>, <code>route:clear</code></li>
+                    <li>Desativação temporária do Xdebug: <code>php -d xdebug.mode=off artisan view:clear</code></li>
+                    <li>Descoberta e remoção de arquivo duplicado (<code>app.blade.php</code> fora de <code>layouts/</code>)</li>
+                </ul>
+
+                <h5 style="color: #d62828; margin-top: 15px;">3. Erro com Campo purchase_date ao Editar</h5>
+                <p><strong>Problema:</strong> Erro "Call to a member function format() on null" ao tentar editar roupas com data de compra vazia.</p>
+                <p><strong>Solução Aplicada:</strong></p>
+                <ul>
+                    <li>Uso do helper <code>optional()</code>: <code>optional($cloth->purchase_date)->format('Y-m-d')</code></li>
+                    <li>Tratamento seguro de valores nulos em campos de data</li>
+                    <li>Alternativa com operador ternário para maior compatibilidade</li>
+                </ul>
+
+                <h5 style="color: #d62828; margin-top: 15px;">4. Upload de Imagens Não Funcionando</h5>
+                <p><strong>Problema:</strong> Imagens eram salvas no storage mas não apareciam no navegador (erro 404 ao acessar via URL).</p>
+                <p><strong>Solução Aplicada:</strong></p>
+                <ul>
+                    <li>Criação de link simbólico: <code>php artisan storage:link</code></li>
+                    <li>Criação manual da pasta <code>storage/app/public/clothes</code></li>
+                    <li>Verificação de que o link <code>public/storage</code> apontava corretamente para <code>storage/app/public</code></li>
+                </ul>
+
+                <h5 style="color: #d62828; margin-top: 15px;">5. Conflito de Estilos CSS (Bootstrap vs Customizado)</h5>
+                <p><strong>Problema:</strong> Existiam dois arquivos de layout diferentes: um com Bootstrap (navbar preta) e outro com CSS customizado (navbar gradiente). Sistema carregava o arquivo errado.</p>
+                <p><strong>Solução Aplicada:</strong></p>
+                <ul>
+                    <li>Identificação do arquivo duplicado em <code>resources/views/app.blade.php</code></li>
+                    <li>Remoção do arquivo antigo e padronização em <code>resources/views/layouts/app.blade.php</code></li>
+                    <li>Verificação de todas as views para garantir <code>@extends('layouts.app')</code></li>
+                </ul>
+
+                <p style="margin-top: 20px;"><strong>💡 Aprendizado:</strong> Esses desafios, embora frustrantes inicialmente, foram cruciais para entender profundamente o funcionamento do Laravel e desenvolver habilidades sólidas de debugging.</p>
             </div>
 
             <h3>2.2 Processo de Refatoração</h3>
