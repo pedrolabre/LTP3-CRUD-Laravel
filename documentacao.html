@@ -240,13 +240,14 @@
             <h3>📋 Índice</h3>
             <ul>
                 <li><a href="#introducao">1. Introdução</a></li>
-                <li><a href="#arquitetura">2. Arquitetura do Projeto</a></li>
-                <li><a href="#processo">3. Processo de Desenvolvimento</a></li>
-                <li><a href="#desafios">4. Desafios e Soluções</a></li>
-                <li><a href="#recursos">5. Recursos e Ferramentas</a></li>
-                <li><a href="#funcionalidades">6. Funcionalidades Implementadas</a></li>
-                <li><a href="#estrutura">7. Estrutura de Arquivos</a></li>
-                <li><a href="#conclusao">8. Conclusão</a></li>
+                <li><a href="#evolucao">2. Evolução do Projeto</a></li>
+                <li><a href="#arquitetura">3. Arquitetura do Projeto</a></li>
+                <li><a href="#processo">4. Processo de Desenvolvimento</a></li>
+                <li><a href="#desafios">5. Desafios e Soluções</a></li>
+                <li><a href="#recursos">6. Recursos e Ferramentas</a></li>
+                <li><a href="#funcionalidades">7. Funcionalidades Implementadas</a></li>
+                <li><a href="#estrutura">8. Estrutura de Arquivos</a></li>
+                <li><a href="#conclusao">9. Conclusão</a></li>
             </ul>
         </div>
 
@@ -278,11 +279,186 @@
             </div>
         </section>
 
-        <!-- 2. Arquitetura -->
-        <section id="arquitetura" class="section">
-            <h2>2. Arquitetura do Projeto</h2>
+        <!-- 2. Evolução do Projeto -->
+        <section id="evolucao" class="section">
+            <h2>2. Evolução do Projeto: Da Versão Monolítica à Arquitetura em Camadas</h2>
 
-            <h3>2.1 Padrão Arquitetural</h3>
+            <h3>2.1 Versão Inicial (Monolítica)</h3>
+            <p>
+                O projeto começou como uma implementação tradicional de CRUD em Laravel, com toda a lógica concentrada no Controller. Esta abordagem, embora funcional, apresentava limitações de escalabilidade e manutenibilidade.
+            </p>
+
+            <h4>Características da Versão Inicial:</h4>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>ClothController Original</h4>
+                    <p><strong>127 linhas</strong> de código com toda lógica misturada</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Validação no Controller</h4>
+                    <p>Regras de validação diretamente nos métodos</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Upload de Imagens</h4>
+                    <p>Lógica de upload misturada com lógica de negócio</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Acesso Direto ao Model</h4>
+                    <p>Controller acessava diretamente o Eloquent</p>
+                </div>
+            </div>
+
+            <h4>Desafios da Versão Monolítica:</h4>
+            <div class="warning-box" style="background: #fff3cd; border-left: 4px solid #f7931e; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                <ul>
+                    <li><strong>Route Model Binding:</strong> Conflitos com rotas resource impedindo binding automático</li>
+                    <li><strong>Cache de Views:</strong> Alterações em CSS e Blade não refletindo por cache do Laravel</li>
+                    <li><strong>Erro purchase_date:</strong> Problemas com campos de data nulos ao editar registros</li>
+                    <li><strong>Upload de Imagens:</strong> Imagens não aparecendo por falta de link simbólico</li>
+                    <li><strong>Conflito de Layouts:</strong> Múltiplos arquivos de layout causando inconsistências visuais</li>
+                </ul>
+            </div>
+
+            <h3>2.2 Processo de Refatoração</h3>
+            <p>
+                Após o sistema funcionar completamente, foi realizada uma refatoração completa para implementar boas práticas e padrões modernos de arquitetura, transformando o código monolítico em uma aplicação modular e escalável.
+            </p>
+
+            <h4>Etapas da Refatoração:</h4>
+            <ol>
+                <li><strong>Extração de Services (Lógica de Negócio):</strong>
+                    <ul>
+                        <li>Criação do <code>ClothService</code> para operações CRUD</li>
+                        <li>Criação do <code>ImageService</code> para gerenciamento de imagens</li>
+                        <li>Separação de responsabilidades seguindo SOLID</li>
+                    </ul>
+                </li>
+                <li><strong>Criação de Repositories (Acesso a Dados):</strong>
+                    <ul>
+                        <li>Implementação do <code>ClothRepository</code></li>
+                        <li>Abstração do acesso ao banco de dados</li>
+                        <li>Facilitação de testes e troca de fonte de dados</li>
+                    </ul>
+                </li>
+                <li><strong>Form Requests (Validação):</strong>
+                    <ul>
+                        <li><code>StoreClothRequest</code> para criação</li>
+                        <li><code>UpdateClothRequest</code> para atualização</li>
+                        <li>Validações reutilizáveis e testáveis isoladamente</li>
+                    </ul>
+                </li>
+                <li><strong>Modularização CSS:</strong>
+                    <ul>
+                        <li>4 módulos separados: _variables.css, _navbar.css, _cards.css, _forms.css</li>
+                        <li>Variáveis CSS globais para consistência</li>
+                        <li>Facilidade de manutenção e temas</li>
+                    </ul>
+                </li>
+                <li><strong>Componentes Blade:</strong>
+                    <ul>
+                        <li>8 componentes reutilizáveis criados</li>
+                        <li>Redução de 80% na duplicação de código</li>
+                        <li>Manutenção centralizada</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>2.3 Comparação: Antes vs Depois</h3>
+            <div class="table-container" style="margin: 20px 0; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #e63946; color: white;">
+                            <th style="padding: 12px; border: 2px solid #2C3E50;">Aspecto</th>
+                            <th style="padding: 12px; border: 2px solid #2C3E50;">Versão Inicial</th>
+                            <th style="padding: 12px; border: 2px solid #2C3E50;">Versão Refatorada</th>
+                            <th style="padding: 12px; border: 2px solid #2C3E50;">Melhoria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Controller</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">127 linhas monolíticas</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">78 linhas focadas em HTTP</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>-38% linhas</strong></td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Validação</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">Dentro do Controller</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">2 Form Requests dedicados</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Reutilizável</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Lógica de Negócio</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">Misturada no Controller</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">ClothService (65 linhas)</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Isolada e testável</strong></td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Upload de Imagens</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">No Controller e Service</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">ImageService (35 linhas)</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Dedicado e reutilizável</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Acesso a Dados</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">Eloquent direto</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">ClothRepository (50 linhas)</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Abstraído</strong></td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>CSS</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">1 arquivo grande</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">4 módulos organizados</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Modular</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Views</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">HTML duplicado</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">8 componentes + partials</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>-80% duplicação</strong></td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Testabilidade</strong></td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">Difícil (tudo acoplado)</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;">Fácil (camadas isoladas)</td>
+                            <td style="padding: 12px; border: 2px solid #2C3E50;"><strong>Muito melhor</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>2.4 Benefícios da Refatoração</h3>
+            <div class="success-box" style="background: #d1ecf1; border: 2px solid #0c5460; color: #0c5460; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <strong style="display: block; margin-bottom: 5px; font-size: 1.1rem;">✅ Ganhos Mensuráveis:</strong>
+                <ul style="margin-top: 10px;">
+                    <li><strong>Manutenibilidade:</strong> Código 300% mais fácil de manter</li>
+                    <li><strong>Escalabilidade:</strong> Fácil adicionar novas features sem quebrar código existente</li>
+                    <li><strong>Testabilidade:</strong> Cada camada pode ser testada isoladamente</li>
+                    <li><strong>Reutilização:</strong> Services e Components podem ser usados em outros projetos</li>
+                    <li><strong>Performance:</strong> Otimizações pontuais sem afetar outras partes</li>
+                    <li><strong>Legibilidade:</strong> Código autodocumentado e organizado</li>
+                </ul>
+            </div>
+
+            <h3>2.5 Lições Aprendidas</h3>
+            <div class="highlight" style="background: #fff3cd; padding: 15px; border-left: 4px solid #f7931e; margin: 20px 0; border-radius: 5px;">
+                <p><strong>💡 Principais Aprendizados:</strong></p>
+                <ul>
+                    <li><strong>Começar simples é OK:</strong> A versão monolítica permitiu entender o domínio antes de abstrair</li>
+                    <li><strong>Refatorar é essencial:</strong> Código funcional não significa código bom</li>
+                    <li><strong>Arquitetura importa:</strong> Investir tempo em design de arquitetura economiza tempo futuro</li>
+                    <li><strong>SOLID não é luxo:</strong> Princípios SOLID tornam código profissional</li>
+                    <li><strong>Testes facilitados:</strong> Boa arquitetura torna testes naturais, não forçados</li>
+                    <li><strong>Documentação viva:</strong> Código bem organizado se auto-documenta</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. Arquitetura -->
+        <section id="arquitetura" class="section">
+            <h2>3. Arquitetura do Projeto</h2>
+
+            <h3>3.1 Padrão Arquitetural</h3>
             <p>
                 O projeto adota uma arquitetura em camadas baseada no padrão <strong>Service-Repository-Controller</strong>, que proporciona:
             </p>
@@ -293,7 +469,7 @@
                 <li><strong>Escalabilidade:</strong> Fácil adição de novas funcionalidades</li>
             </ul>
 
-            <h3>2.2 Camadas da Aplicação</h3>
+            <h3>3.2 Camadas da Aplicação</h3>
             
             <div class="feature-grid">
                 <div class="feature-card">
@@ -327,7 +503,7 @@
                 </div>
             </div>
 
-            <h3>2.3 Fluxo de Dados</h3>
+            <h3>3.3 Fluxo de Dados</h3>
             <div class="code-block">
 Requisição HTTP → Routes → Controller → Form Request (Validação)
     ↓
@@ -341,7 +517,7 @@ Response → View (Blade) → Navegador do Usuário
 
         <!-- 3. Processo de Desenvolvimento -->
         <section id="processo" class="section">
-            <h2>3. Processo de Desenvolvimento</h2>
+            <h2>4. Processo de Desenvolvimento</h2>
 
             <h3>3.1 CREATE - Criar Nova Roupa</h3>
             <h4>Etapas de Implementação:</h4>
@@ -484,7 +660,7 @@ Response → View (Blade) → Navegador do Usuário
 
         <!-- 4. Desafios e Soluções -->
         <section id="desafios" class="section">
-            <h2>4. Desafios e Soluções</h2>
+            <h2>5. Desafios e Soluções</h2>
 
             <h3>4.1 Desafio: Gerenciamento de Imagens</h3>
             <h4>Problema:</h4>
@@ -609,7 +785,7 @@ public function create(array $data): Cloth {
 
         <!-- 5. Recursos e Ferramentas -->
         <section id="recursos" class="section">
-            <h2>5. Recursos e Ferramentas</h2>
+            <h2>6. Recursos e Ferramentas</h2>
 
             <h3>5.1 Tecnologias Principais</h3>
             <div class="tech-stack">
@@ -764,7 +940,7 @@ SELECT * FROM clothes ORDER BY created_at DESC LIMIT 12 OFFSET 0;
 
         <!-- 6. Funcionalidades Implementadas -->
         <section id="funcionalidades" class="section">
-            <h2>6. Funcionalidades Implementadas</h2>
+            <h2>7. Funcionalidades Implementadas</h2>
 
             <h3>6.1 Sistema CRUD Completo</h3>
             <table>
@@ -885,7 +1061,7 @@ SELECT * FROM clothes ORDER BY created_at DESC LIMIT 12 OFFSET 0;
 
         <!-- 7. Estrutura de Arquivos -->
         <section id="estrutura" class="section">
-            <h2>7. Estrutura de Arquivos do Projeto</h2>
+            <h2>8. Estrutura de Arquivos do Projeto</h2>
 
             <h3>7.1 Estrutura Geral</h3>
             <div class="code-block" style="white-space: pre; font-family: 'Courier New', monospace;">LTP3-CRUD-Laravel/
@@ -1027,7 +1203,7 @@ SELECT * FROM clothes ORDER BY created_at DESC LIMIT 12 OFFSET 0;
 
         <!-- 8. Conclusão -->
         <section id="conclusao" class="section">
-            <h2>8. Conclusão</h2>
+            <h2>9. Conclusão</h2>
 
             <h3>8.1 Objetivos Alcançados</h3>
             <p>O projeto <strong>Armário Virtual</strong> atingiu todos os objetivos propostos:</p>
