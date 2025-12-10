@@ -1,8 +1,8 @@
 # 👔 Armário Virtual - Sistema CRUD Laravel
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
-  <img src="https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/Laravel-12.40.1-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/PHP-8.2.12-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
   <img src="https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
   <img src="https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap">
 </p>
@@ -24,8 +24,8 @@
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Framework:** Laravel 11.x
-- **Linguagem:** PHP 8.2
+- **Framework:** Laravel 12.40.1
+- **Linguagem:** PHP 8.2.12
 - **Banco de Dados:** MySQL
 - **Template Engine:** Blade
 - **Frontend:** Bootstrap 5, Bootstrap Icons
@@ -120,7 +120,7 @@ config/
 
 ### Pré-requisitos
 
-- PHP 8.2 ou superior
+- PHP 8.2.12 ou superior
 - Composer
 - MySQL
 - XAMPP (ou outro servidor Apache/MySQL)
@@ -301,8 +301,9 @@ Este projeto é um trabalho acadêmico desenvolvido para fins educacionais.
 
 **Pedro Labre**
 
-- GitHub: [@pedrolabre](https://github.com/pedrolabre)
+Repositório GitHub: [@pedrolabre](https://github.com/pedrolabre)
 - Projeto: [LTP3-CRUD-Laravel](https://github.com/pedrolabre/LTP3-CRUD-Laravel)
+- Laravel: 12.40.1 | PHP: 8.2.12
 
 ## 🎓 Contexto Acadêmico
 
